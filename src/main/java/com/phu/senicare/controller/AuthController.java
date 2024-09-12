@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.phu.senicare.dto.request.auth.IdCheckRequestDto;
+import com.phu.senicare.dto.request.auth.SignInRequestDto;
+import com.phu.senicare.dto.request.auth.SignUpRequestDto;
 import com.phu.senicare.dto.request.auth.TelAuthCheckRequestDto;
 import com.phu.senicare.dto.request.auth.TelAuthRequestDto;
 import com.phu.senicare.dto.response.ResponseDto;
+import com.phu.senicare.dto.response.auth.SignInResponseDto;
 import com.phu.senicare.service.AuthService;
 
 import jakarta.validation.Valid;
@@ -44,6 +47,22 @@ public class AuthController {
     ) {
         ResponseEntity<ResponseDto> response = authService.telAuthCheck(requestBody);
         return response; 
+    }
+
+    @PostMapping("/sign-up")
+    public ResponseEntity<ResponseDto> signUp(
+        @RequestBody @Valid SignUpRequestDto requestBody
+    ) {
+        ResponseEntity<ResponseDto> response = authService.signUp(requestBody);
+        return response; 
+    }
+
+    @PostMapping("/sign-in")
+    public ResponseEntity<? super SignInResponseDto> signIn(
+        @RequestBody @Valid SignInRequestDto requsetBody
+    ) {
+        ResponseEntity<? super SignInResponseDto> response = authService.signIn(requsetBody);
+        return response;
     }
 
 }

@@ -8,8 +8,10 @@ import com.phu.senicare.entity.NurseEntity;
 @Repository
 public interface NurseRepository extends JpaRepository<NurseEntity, String> {
     
-    String 
+
     boolean existsByUserId(String userId);
     boolean existsByTelNumber(String telNumber);
+
+    NurseEntity findByUserId(String userId);
 
 }
