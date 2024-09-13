@@ -12,12 +12,14 @@ public class CustomOAuth2User implements OAuth2User {
 
     private String name;
     private  Map<String, Object> attributes;
-    Collection<? extends GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities;
+    private boolean existed;
 
-    public CustomOAuth2User(String name, Map<String, Object> attributes) {
+    public CustomOAuth2User(String name, Map<String, Object> attributes, boolean existed) {
         this.name = name;
         this.attributes = attributes;
         this.authorities = AuthorityUtils.NO_AUTHORITIES;
+        this.existed = existed;
     }
 
     @Override
@@ -34,6 +36,10 @@ public class CustomOAuth2User implements OAuth2User {
     public String getName() {
         return this.name;
 
+    }
+
+    public boolean isExisted() {
+        return this.existed;
     }
     
 }
