@@ -1,5 +1,7 @@
 package com.phu.senicare.config;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,16 +10,23 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.phu.senicare.dto.response.ResponseCode;
+import com.phu.senicare.dto.response.ResponseMessage;
 import com.phu.senicare.filter.JwtAuthenticationFilter;
 import com.phu.senicare.handler.OAuth2SuccessHandler;
 import com.phu.senicare.service.implement.OAuth2UserServiceImplement;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 // Spring Web 보안 설정
@@ -49,6 +58,10 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/v1/auth/**","/oauth2/callback/*", "/").permitAll()
                 .anyRequest().authenticated()
             )
+            // 인증 및 인가 작업중 발생하는 예외 처리
+            .exceptionHandling(exception -> exception
+                .authenticationEntryPoint(new AuthenticationFailEntryPoint())
+            )
             // OAuth2 로그인 적용
             .oauth2Login(oauth2 -> oauth2
                 .redirectionEndpoint(endpoint -> endpoint.baseUri("/oauth2/callback/*"))
@@ -75,4 +88,19 @@ public class WebSecurityConfig {
 
         return source;
     }
+}
+
+class AuthenticationFailEntryPoint implements AuthenticationEntryPoint{
+
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException authException) throws IOException, ServletException {
+                
+        authException.printStackTrace();
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("{ \"code\": \""+ ResponseCode.AUTHENTICATION_FAIL + 
+        "\", \"\"message\" : \"" + ResponseMessage.AUTHENTICATION_FAIL+ "\" }");
+    }
+
 }
