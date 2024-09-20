@@ -39,6 +39,11 @@ public class ResponseDto{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
 
+    public static ResponseEntity<ResponseDto> noEixstTool(){
+        ResponseDto responseBody = new ResponseDto(ResponseCode.NO_EXIST_TOOL, ResponseMessage.NO_EXIST_TOOL);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+    }
+
     public static ResponseEntity<ResponseDto> telAuthFail(){
         ResponseDto responseBody = new ResponseDto(ResponseCode.TEL_AUTH_FAILE, ResponseMessage.TEL_AUTH_FAILE);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);

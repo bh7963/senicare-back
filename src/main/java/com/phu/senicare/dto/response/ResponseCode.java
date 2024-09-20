@@ -11,6 +11,7 @@ public interface ResponseCode {
     String DUPLICATE_USER_ID = "DI";
     String DUPLICATE_TELNUMBER = "DT";
     String NO_EXIST_USER_ID = "NI";
+    String NO_EXIST_TOOL = "NT";
     
     // ERROR_CODE 401
     String TEL_AUTH_FAILE = "TAF"; 
