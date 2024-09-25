@@ -12,10 +12,13 @@ public interface ResponseCode {
     String DUPLICATE_TELNUMBER = "DT";
     String NO_EXIST_USER_ID = "NI";
     String NO_EXIST_TOOL = "NT";
+    String NO_EXIST_CUSTOMER = "NC";
+    String TOOL_INSUFFICIENT = "TI";
     
     // ERROR_CODE 401
     String TEL_AUTH_FAILE = "TAF"; 
     String SIGN_IN_FAIL = "SF";
+    String NO_PERMISSION = "NP";
     String AUTHENTICATION_FAIL = "AF";
 
     // ERROR_CODE 500
