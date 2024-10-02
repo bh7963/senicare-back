@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.phu.senicare.common.object.CareRecord;
 import com.phu.senicare.dto.request.customer.PatchCustomerRequestDto;
 import com.phu.senicare.dto.request.customer.PostCareRecordRequestDto;
 import com.phu.senicare.dto.request.customer.PostCustomerRequestDto;

@@ -20,6 +20,7 @@ public class GetCustomerResponseDto extends ResponseDto {
     private String chargerName;
     private String chargerId;
     private String address;
+    private String location;
 
     private GetCustomerResponseDto (GetCustomerResultSet resultSets) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
@@ -30,6 +31,7 @@ public class GetCustomerResponseDto extends ResponseDto {
         this.chargerName = resultSets.getChargerName();
         this.chargerId = resultSets.getChargerId();
         this.address = resultSets.getAddress(); 
+        this.location = resultSets.getLocation();
     }
 
     public static ResponseEntity<GetCustomerResponseDto> success(GetCustomerResultSet resultSets) {

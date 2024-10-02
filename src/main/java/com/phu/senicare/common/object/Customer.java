@@ -13,7 +13,7 @@ public class Customer {
     private String name;
     private String birth;
     private String location;
-    private String chargetName;
+    private String chargerName;
     private String chargerId;
     
 
@@ -22,10 +22,10 @@ public class Customer {
         this.name = resultSet.getName();
         this.birth = resultSet.getBirth();
         this.location = resultSet.getLocation();
-        this.chargetName = resultSet.getChargerName();
+        this.chargerName = resultSet.getChargerName();
         this.chargerId = resultSet.getChargerId();
     }
-
+    
     public static List<Customer> getList(List<GetCustomersResultSet> resultSets) {
         List<Customer> customers = new ArrayList<>();
         for (GetCustomersResultSet resultSet: resultSets){

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 public class CareRecord {
     private Integer recordNumber;
     private String recordDate;
-    private String cotents;
+    private String contents;
     private String usedToolName;
     private Integer count;
 
     private CareRecord(CareRecordEntity careRecordEntity) {
         this.recordNumber = careRecordEntity.getRecordNumber();
         this.recordDate = careRecordEntity.getRecordDate();
-        this.cotents = careRecordEntity.getContents();
+        this.contents = careRecordEntity.getContents();
         this.usedToolName = careRecordEntity.getUsedToolName();
         this.count = careRecordEntity.getCount();
     }

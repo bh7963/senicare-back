@@ -14,6 +14,7 @@ import com.phu.senicare.repository.resultSet.GetCustomersResultSet;
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
 
     CustomerEntity findByCustomerNumber(Integer customerNumber);
+    List<CustomerEntity> findByCharger(String charger);
     @Query(value=
     "SELECT " +
 	"C.customer_number as customerNumber, " +
@@ -36,7 +37,9 @@ nativeQuery = true
         "C.name as name, " +
         "C.birth as birth, " +
         "N.name as chargerName, " +
-        "N.user_id as chargerId " +
+        "N.user_id as chargerId, " +
+        "C.address as address, "+
+        "C.location as location "+
     "FROM customer C LEFT JOIN nurses N " +
     "ON C.charger = N.user_id " +
     "WHERE C.customer_number = :customerNumber ",
